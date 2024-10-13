@@ -39,6 +39,8 @@ char	*ft_itoa(int n)
 	int		i;
 	int		sign;
 
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	sign = 0;
 	if (n < 0)
 		sign = 1;
