@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	count_words(const char *s, char c)
+static int	word_count(char const *s, char c)
 {
 	int	count;
 	int	in_word;
@@ -21,7 +21,7 @@ static int	count_words(const char *s, char c)
 	in_word = 0;
 	while (*s)
 	{
-		if (*s != c && in_word == 0)
+		if (*s != c && !in_word)
 		{
 			in_word = 1;
 			count++;
@@ -33,44 +33,46 @@ static int	count_words(const char *s, char c)
 	return (count);
 }
 
-static char	*malloc_word(const char *s, char c)
+static char	*malloc_word(char const *s, char c)
 {
-	const char	*start;
-	size_t		len;
-	char		*word;
+	int		len;
+	char	*word;
 
-	start = s;
 	len = 0;
-	while (*s && *s != c)
-	{
+	while (s[len] && s[len] != c)
 		len++;
-		s++;
-	}
 	word = (char *)malloc(sizeof(char) * (len + 1));
 	if (!word)
 		return (NULL);
-	ft_strlcpy(word, start, len + 1);
+	ft_strlcpy(word, s, len + 1);
 	return (word);
 }
 
-char	**ft_split(char const *s, char c)
+static void	free_memory(char **split, int i)
 {
-	char	**split_array;
-	int		i;
+	while (i >= 0)
+	{
+		free(split[i]);
+		i--;
+	}
+	free(split);
+}
 
-	if (!s)
-		return (NULL);
-	split_array = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
-	if (!split_array)
-		return (NULL);
+static char	**fill_split(char **split, char const *s, char c, int words)
+{
+	int	i;
+
 	i = 0;
-	while (*s)
+	while (*s && i < words)
 	{
 		if (*s != c)
 		{
-			split_array[i] = malloc_word(s, c);
-			if (!split_array[i])
+			split[i] = malloc_word(s, c);
+			if (!split[i])
+			{
+				free_memory(split, i - 1);
 				return (NULL);
+			}
 			i++;
 			while (*s && *s != c)
 				s++;
@@ -78,8 +80,22 @@ char	**ft_split(char const *s, char c)
 		else
 			s++;
 	}
-	split_array[i] = NULL;
-	return (split_array);
+	split[i] = NULL;
+	return (split);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+	int		words;
+
+	if (!s)
+		return (NULL);
+	words = word_count(s, c);
+	split = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!split)
+		return (NULL);
+	return (fill_split(split, s, c, words));
 }
 /*int	main(void)
 {
