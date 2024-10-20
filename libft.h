@@ -19,7 +19,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdio.h> // ELIMINARLA ANTES DE ENTREGA
+//# include <stdio.h>
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	*ft_memmove(void *dest, const void *src, size_t n);
