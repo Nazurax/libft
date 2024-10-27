@@ -6,7 +6,7 @@
 /*   By: alortiz- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:01:27 by alortiz-          #+#    #+#             */
-/*   Updated: 2024/10/03 21:56:58 by alortiz-         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:30:04 by alortiz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <limits.h>
-//# include <stdio.h>
+# include <stdio.h>
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	*ft_memmove(void *dest, const void *src, size_t n);
