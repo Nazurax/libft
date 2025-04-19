@@ -6,7 +6,7 @@
 /*   By: alortiz- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:19:10 by alortiz-          #+#    #+#             */
-/*   Updated: 2024/10/20 14:46:36 by alortiz-         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:04:27 by alortiz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,16 @@ char	**ft_split(char const *s, char c)
 }
 /*int	main(void)
 {
-	char	origen[] = "Hello 42 BCN keep going";
-	char	delimitador = ' ';
-	char	**result = ft_split(origen, delimitador);
-	int	i;
+	char	**result;
+	char	str[] = "Hola World  42BCN";
+	char	delimiter = ' ';
+	int		i;
 
-	i = 0;	
+	result = ft_split(str, delimiter);
+	i = 0;
 	while (result[i])
 	{
-		printf("Substring %d: %s\n", i, result[i]);
+		printf("Subcadena %d: %s\n", i, result[i]);
 		i++;
 	}
 	i = 0;
